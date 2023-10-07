@@ -34,6 +34,22 @@ int readLine(FILE *f, char resultLine[LINE_MAX_LENGTH]) {
     return len; //Vrátíme počet přečtených znaků
 }
 
+//Zpracuj adresu...
+void processAddress(char address[100]) {
+    //Tady by byla nějaké zpracování jedné adresy pro projekt
+    printf("adresa=%s", address);
+}
+
+int nacteniAdres(FILE *inputFile) {
+    char address[100];
+    int readCount = 0;
+    do {
+        readCount = readLine(inputFile, address);
+        if(readCount > 0)
+            processAddress(address);
+    } while(readCount != 0);     //Čteme adresy, dokud nějaká je v souboru
+}
+
 int main(int argc, char **argv) {
     //Otevření souboru pro čtení a uložení do proměnné inputFile
     FILE * inputFile = fopen("inputFile.txt", "r"); 
@@ -55,6 +71,10 @@ int main(int argc, char **argv) {
 
     readLine(inputFile, &line2); //inputFile.txt nic neobsahuje, ale program nesmí spadnout
     readLine(inputFile, &line2); //inputFile.txt nic neobsahuje, ale program nesmí spadnout
+
+
+    //Na zbytek souboru budeme číst adresy jako v projektu
+    nacteniAdres(inputFile);
     
 
     fclose(inputFile); //Uzavření souboru
